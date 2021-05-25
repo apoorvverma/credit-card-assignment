@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import getCardType from './GetCardType';
+
 
 class MyForm extends React.Component {
+    
     constructor(props) {
       super(props);
       this.state = {
+        cardType: '',
         cardNum: '',
         cardName: '',
         month: '',
@@ -12,34 +16,38 @@ class MyForm extends React.Component {
         cvv: '',
       };
     }
+    
+    
     myChangeHandler = (event) => {
+      const cardType =getCardType(event.target.value);
       let nam = event.target.name;
       let val = event.target.value;
       this.setState({[nam]: val});
+      this.setState({cardType: cardType});
     }
-// const Basecard = () => {
     render() {
-        return  (
+        return (
             <div className="flex justify-center rounded-lg ">
                 <div className="shadow-lg p-5 ">
                 <div className="bg-local p-5 h-52 w-96 rounded-lg shadow-2xl mb-10" style={{ backgroundImage: `url(/assets/7.jpeg)`, backgroundSize: '100% 100%'}}>
                 <div className="flex justify-between">
                     <div className="bg-local h-10 w-12 " style={{ backgroundImage: `url(/assets/chip.png)`, backgroundSize: '100% 100%'}}/>
-                    <div className="bg-local h-10 w-12" style={{ backgroundImage: `url()`, backgroundSize: '100% 100%'}}/>
+                    <div className="bg-local h-10 w-24" style={{ backgroundImage: `url(/assets/${this.state.cardType}.png)`, backgroundSize: '100% 100%'}}/>
                 </div>
-                    <p className="text-white pt-8 font-bold text-lg">{this.state.cardNum}</p>
+                    <p className="text-white pt-5 font-bold text-lg">{this.state.cardNum}</p>
                     <div className="flex justify-between"><p className="text-white text-xs mt-5">Card Holder</p>
-                    <p className="inline text-white text-xs mt-5">Expires</p></div>
+                    <p className="inline text-white text-xs">Expires</p></div>
                     <div className="flex ">
                         <p className="inline text-white font-bold text-lg">{this.state.cardName}</p>
                         <p className="text-white font-bold text-lg ml-auto">{this.state.month}/{this.state.year}</p>
                     </div>
+                    <p className="text-white font-bold text-lg text-center">{this.state.cvv}</p>
                     
                 </div>
                     <p className="text-left text-xs">Card Number</p>
-                    <input size="20" pattern="[0-9]*" className="border border-gray-400 rounded-md w-96 p-2 focus:shadow-lg outline-none focus:border-blue-400 focus:border  mb-5" onChange={this.myChangeHandler} name="cardNum"></input>
+                    <input size="20" type="tel" pattern="[\d| ]{16,22}" className="border border-gray-400 rounded-md w-96 p-2 focus:shadow-lg outline-none focus:border-blue-400 focus:border  mb-5" onChange={this.myChangeHandler} min="0" name="cardNum" maxlength="16"></input>
                     <p className="text-left text-xs">Card Name</p>
-                    <input className="border border-gray-400 rounded-md w-96 p-2 focus:shadow-lg outline-none focus:border-blue-400 focus:border mb-5" onChange={this.myChangeHandler} name="cardName"></input>
+                    <input type="text" className="border border-gray-400 rounded-md w-96 p-2 focus:shadow-lg outline-none focus:border-blue-400 focus:border mb-5" maxlength="20" onChange={this.myChangeHandler} name="cardName"></input>
                     <div className="flex justify-between">
                         <p className="text-xs" >Expiration Date</p>
                         <p className="text-xs">CVV</p>
@@ -69,7 +77,7 @@ class MyForm extends React.Component {
                         <option value="27">2027</option>
                         <option value="28">2028</option>
                     </select>
-                    <input className="border border-gray-400 rounded-md w-24 p-2 ml-auto focus:shadow-lg outline-none focus:border-blue-400 focus:border mb-5" placeholder="CVV" onChange={this.myChangeHandler} name="cvv"></input>
+                    <input className="border border-gray-400 rounded-md w-24 p-2 ml-auto focus:shadow-lg outline-none focus:border-blue-400 focus:border mb-5" type="tel" min="0" onChange={this.myChangeHandler} name="cvv" maxlength="4" ></input>
                     </div>
                     <button className="text-white font-semibold bg-blue-500 px-3 py-2 border border-gray-400 focus:outline-none w-full rounded-md hover:bg-blue-700 shadow-xl">Submit</button>
                     <p className="bg-gray-400"></p>
@@ -80,6 +88,6 @@ class MyForm extends React.Component {
     }
 }
 
-// export default Basecard;
+
 ReactDOM.render(<MyForm />, document.getElementById("root"));
 export default MyForm;
