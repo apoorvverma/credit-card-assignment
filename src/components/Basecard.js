@@ -80,7 +80,7 @@ class MyForm extends React.Component {
                     <input className="border border-gray-400 rounded-md w-24 p-2 ml-auto focus:shadow-lg outline-none focus:border-blue-400 focus:border mb-5" type="tel" min="0" onChange={this.myChangeHandler} name="cvv" maxlength="4" ></input>
                     </div>
                     <button className="text-white font-semibold bg-blue-500 px-3 py-2 border border-gray-400 focus:outline-none w-full mb-10 rounded-md hover:bg-blue-700 shadow-xl">Submit</button>
-                <a  href="https://credit-card-display.netlify.app/">Github Repository</a>
+                <a  href="https://github.com/apoorvverma/credit-card-assignment">Github Repository</a>
                 </div>
                 
             </div>
